@@ -8,17 +8,17 @@
 </head>
 
 <body>
-  <dialog class="dialog">
+  <dialog class="item-dialog dialog">
     <button class="close-form">X</button>
     <form action="#" method="get" class="item-form" autofocus>
       <label for="title">Title:
-        <input type="text" id="title" required>
+        <input type="text" id="title" class="item" required>
       </label>
       <label for="desc">Description:
-        <input type="text" id="desc" required>
+        <input type="text" id="desc" class="item" required>
       </label>
       <label for="due-date">Due Date:
-        <input type="date" id="due-date" required>
+        <input type="date" id="due-date" class="item" required>
       </label>
       <div>
         <label for="priority">Priority</label>
@@ -28,11 +28,20 @@
           <option value="high">High</option>
         </select>
       </div>
-      <button class="submit" type="button">Submit</button>
+      <button class="submit-item" type="button">Submit</button>
     </form>
   </dialog>
-  <button class="open-form">New Item</button>
-
+  <button class="new-item">New Item</button>
+  <button class="new-project">New Project</button>
+  <dialog class="project-dialog dialog">
+    <form action="#" method="get" class="project-form">
+      <button class="close-form">X</button>
+      <label for="project-name">Name of project:
+        <input type="text" id="project-name" class="project">
+      </label>
+      <button class="submit-project" type="button">Submit</button>
+    </form>
+  </dialog>
 </body>
 
 </html>
