@@ -8,6 +8,30 @@
 </head>
 
 <body>
+  <dialog class="dialog">
+    <button class="close-form">X</button>
+    <form action="#" method="get" class="item-form" autofocus>
+      <label for="title">Title:
+        <input type="text" id="title" required>
+      </label>
+      <label for="desc">Description:
+        <input type="text" id="desc" required>
+      </label>
+      <label for="due-date">Due Date:
+        <input type="date" id="due-date" required>
+      </label>
+      <div>
+        <label for="priority">Priority</label>
+        <select name="priority" id="priority">
+          <option value="low">Low</option>
+          <option value="med">Med</option>
+          <option value="high">High</option>
+        </select>
+      </div>
+      <button class="submit" type="button">Submit</button>
+    </form>
+  </dialog>
+  <button class="open-form">New Item</button>
 
 </body>
 
