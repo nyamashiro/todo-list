@@ -1,10 +1,20 @@
-import { createNewItem } from "./to-do-items";
+import { createNewItem, createNewProject } from "./to-do-items";
 
 const eventHandlers = function () {
 
-  const openForm = (function () {
-    const form = document.querySelector(".open-form");
-    const dialog = document.querySelector(".dialog");
+  const openItemForm = (function () {
+    const form = document.querySelector(".new-item");
+    const dialog = document.querySelector(".item-dialog");
+
+
+    form.addEventListener("click", () => {
+      dialog.showModal();
+    })
+  })()
+
+  const openProjectForm = (function () {
+    const form = document.querySelector(".new-project");
+    const dialog = document.querySelector(".project-dialog");
 
     form.addEventListener("click", () => {
       dialog.showModal();
@@ -12,36 +22,55 @@ const eventHandlers = function () {
   })()
 
   const closeForm = (function () {
-    const close = document.querySelector(".close-form");
-    const dialog = document.querySelector(".dialog");
 
-    close.addEventListener("click", () => {
-      dialog.close();
+    document.addEventListener("click", (e) => {
+      if (e.target.classList.contains("close-form")) {
+        const dialog = e.target.closest(".dialog");
+        dialog.close();
+      }
     })
   })()
 
-  const captureFormDataIntoArray = function () {
-    let toDoDataMinusPriority = document.querySelectorAll("input");
-    let toDoPriorityData = document.querySelector("select").value;
-    let toDoDataArr = [];
+  const captureItemDataIntoArray = function () {
+    let inputs = document.querySelectorAll(".item");
+    let priority = document.querySelector("select").value;
 
-    toDoDataMinusPriority.forEach(data => {
-      toDoDataArr.push(data.value)
-    })
-    toDoDataArr.push(toDoPriorityData)
-
-    return toDoDataArr;
+    let formData = Array.from(inputs).map(input => input.value);
+    return [...formData, priority]
   }
 
-  const submitForm = (function () {
-    const submit = document.querySelector(".submit");
-    const form = document.querySelector("form")
+  const captureProject = function () {
+    let project = document.querySelector(".project").value;
+    return project
+  }
+
+  const submitItemForm = (function (callback) {
+
+    const submit = document.querySelector(".submit-item");
+    const form = document.querySelector(".item-form")
 
     submit.addEventListener("click", () => {
-      console.log(createNewItem(...captureFormDataIntoArray()))
+      let newItem = createNewItem(...captureItemDataIntoArray())
+      console.log(newItem)
+      callback(newItem)
       form.reset();
     })
   })()
+
+  const submitProjectForm = (function (callback) {
+
+    const submit = document.querySelector(".submit-project");
+    const form = document.querySelector(".project-form")
+
+    submit.addEventListener("click", () => {
+      let newProject = createNewProject(captureProject())
+      console.log(newProject)
+      callback(newProject)
+      form.reset();
+    })
+  })()
+
+  return { submitItemForm }
 }
 
 export { eventHandlers }
