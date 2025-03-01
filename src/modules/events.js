@@ -3,21 +3,22 @@ import { createNewItem, createNewProject } from "./to-do-items";
 const eventHandlers = (function () {
 
   const openItemForm = (function () {
-    const form = document.querySelector(".new-item");
     const dialog = document.querySelector(".item-dialog");
 
-
-    form.addEventListener("click", () => {
-      dialog.showModal();
+    document.body.addEventListener("click", (e) => {
+      if (e.target.classList.contains("new-item")) {
+        dialog.showModal();
+      }
     })
   })()
 
   const openProjectForm = (function () {
-    const form = document.querySelector(".new-project");
     const dialog = document.querySelector(".project-dialog");
 
-    form.addEventListener("click", () => {
-      dialog.showModal();
+    document.body.addEventListener("click", (e) => {
+      if (e.target.classList.contains("new-project")) {
+        dialog.showModal();
+      }
     })
   })()
 
@@ -39,7 +40,7 @@ const eventHandlers = (function () {
     return [...formData, priority]
   }
 
-  const captureProject = function () {
+  const captureProjectValue = function () {
     let project = document.querySelector(".project").value;
     return project
   }
@@ -62,13 +63,14 @@ const eventHandlers = (function () {
     const form = document.querySelector(".project-form")
 
     submit.addEventListener("click", () => {
-      let newProject = createNewProject(captureProject())
+      let newProject = createNewProject(captureProjectValue())
       callback(newProject)
       form.reset();
+      document.querySelector(".project-dialog").close();
     })
   }
 
   return { submitItemForm, submitProjectForm }
 })()
 
-export { eventHandlers }
+export default eventHandlers;

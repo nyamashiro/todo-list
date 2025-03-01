@@ -1,5 +1,7 @@
 import { createNewItem, createNewProject, defaultList, addProjectToList } from "./modules/to-do-items.js";
-import { eventHandlers } from "./modules/events.js"
+import eventHandlers from "./modules/events.js"
+import renderElements from "./modules/renders.js"
+import "./modules/style.css"
 
 
 const createDefaultProject = (function () {

@@ -65,7 +65,5 @@ const addProjectToList = function () {
   return newList.addProjectToList;
 }
 
-
-
 export { createNewItem, createNewProject, defaultList, addProjectToList }
 
