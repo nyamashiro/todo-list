@@ -5,9 +5,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>To Do List!</title>
+  <link rel="stylesheet" href="./modules/style.css">
 </head>
 
 <body>
+  <header class="header">Get To It</header>
+  <nav>
+    <div class="projects">Projects
+      <ul>
+        <li>Default</li>
+      </ul>
+    </div>
+  </nav>
   <dialog class="item-dialog dialog">
     <button class="close-form">X</button>
     <form action="#" method="get" class="item-form" autofocus>
@@ -31,8 +40,6 @@
       <button class="submit-item" type="button">Submit</button>
     </form>
   </dialog>
-  <button class="new-item">New Item</button>
-  <button class="new-project">New Project</button>
   <dialog class="project-dialog dialog">
     <form action="#" method="get" class="project-form">
       <button class="close-form">X</button>
@@ -42,6 +49,8 @@
       <button class="submit-project" type="button">Submit</button>
     </form>
   </dialog>
+  <button class="new-item">New Item</button>
+  <button class="new-project">New Project</button>
 </body>
 
 </html>
