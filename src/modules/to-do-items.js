@@ -23,44 +23,49 @@ class ToDoItem {
   }
 }
 
-class ToDoList {
-  constructor(item) {
-    this.items = [item];
+class List {
+  constructor() {
+    this.name = "Default"
+    this.projects = [];
   }
 
-  addItem(item) {
-    this.items.push(item);
+  addProjectToList(project) {
+    this.projects.push(project);
+
   }
 
-  removeItem(title) {
-    this.items.filter((item) => item.title !== title)
+  removeProjectFromList(index) {
+    this.projects.splice(index, 1);
   }
 }
 
 class Project {
   constructor(name) {
     this.name = name;
-    this.list = [];
+    this.items = [];
   }
 
-  addList(list) {
-    this.list.push(list)
+  addItemToProject(item) {
+    this.items.push(item)
   }
 }
 
 const createNewItem = function (title, desc, dueDate, priority) {
-  return new ToDoItem(title, desc, dueDate, priority)
-}
-
-const createNewList = function () {
-  return new ToDoList();
+  return new ToDoItem(title, desc, dueDate, priority);
 }
 
 const createNewProject = function (name) {
-  return new Project(name)
+  return new Project(name);
+}
+
+const defaultList = new List();
+
+const addProjectToList = function () {
+  const newList = new List();
+  return newList.addProjectToList;
 }
 
 
 
-export { ToDoItem, ToDoList, Project, createNewItem, createNewList, createNewProject }
+export { createNewItem, createNewProject, defaultList, addProjectToList }
 

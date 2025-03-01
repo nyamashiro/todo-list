@@ -1,6 +1,6 @@
 import { createNewItem, createNewProject } from "./to-do-items";
 
-const eventHandlers = function () {
+const eventHandlers = (function () {
 
   const openItemForm = (function () {
     const form = document.querySelector(".new-item");
@@ -44,33 +44,31 @@ const eventHandlers = function () {
     return project
   }
 
-  const submitItemForm = (function (callback) {
+  const submitItemForm = function (callback) {
 
     const submit = document.querySelector(".submit-item");
     const form = document.querySelector(".item-form")
 
     submit.addEventListener("click", () => {
       let newItem = createNewItem(...captureItemDataIntoArray())
-      console.log(newItem)
       callback(newItem)
       form.reset();
     })
-  })()
+  }
 
-  const submitProjectForm = (function (callback) {
+  const submitProjectForm = function (callback) {
 
     const submit = document.querySelector(".submit-project");
     const form = document.querySelector(".project-form")
 
     submit.addEventListener("click", () => {
       let newProject = createNewProject(captureProject())
-      console.log(newProject)
       callback(newProject)
       form.reset();
     })
-  })()
+  }
 
-  return { submitItemForm }
-}
+  return { submitItemForm, submitProjectForm }
+})()
 
 export { eventHandlers }
