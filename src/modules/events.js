@@ -70,7 +70,18 @@ const eventHandlers = (function () {
     })
   }
 
-  return { submitItemForm, submitProjectForm }
+  const deleteProject = function (callback) {
+    const projectUl = document.querySelector(".project-list");
+    projectUl.addEventListener("click", ((e) => {
+      if (e.target.classList.contains("delete-project")) {
+        const project = e.target.closest(".project-li");
+        const projectId = project.dataset.id
+        callback(projectId)
+      }
+    }))
+  }
+
+  return { submitItemForm, submitProjectForm, deleteProject }
 })()
 
 export default eventHandlers;

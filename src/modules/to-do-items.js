@@ -60,10 +60,5 @@ const createNewProject = function (name) {
 
 const defaultList = new List();
 
-const addProjectToList = function () {
-  const newList = new List();
-  return newList.addProjectToList;
-}
-
-export { createNewItem, createNewProject, defaultList, addProjectToList }
+export { createNewItem, createNewProject, defaultList}
 
