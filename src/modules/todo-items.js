@@ -63,9 +63,15 @@ const itemElements = (function () {
     return div;
   }
 
+  const selectCurrentItem = function(e) {
+    const itemLi = e.target.closest(".item-li");
+    const itemId = itemLi.dataset.id;
+    document.querySelector("#edit-item-id").value = itemId;
+  }
 
 
-  return { renderItemsList }
+
+  return { renderItemsList, selectCurrentItem }
 })()
 
 export { itemElements }

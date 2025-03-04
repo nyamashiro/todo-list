@@ -45,4 +45,12 @@ projectListElements.renderProjectsList(defaultList.projects);
 defaultProject.addItemToProject(defaultItem)
 itemElements.renderItemsList(defaultProject.items)
 
-// eventHandlers.editItem()
+eventHandlers.submitEditForm((id, values) => {
+defaultProject.items[id].editName(values[0])
+defaultProject.items[id].editDesc(values[1])
+defaultProject.items[id].editDueDate(values[2])
+defaultProject.items[id].editPriority(values[3])
+
+itemElements.renderItemsList(defaultProject.items)
+
+})

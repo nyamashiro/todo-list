@@ -1,4 +1,5 @@
-import { createNewItem, createNewProject } from "./classes";
+import { ToDoItem, createNewItem, createNewProject } from "./classes";
+import { itemElements } from "./todo-items";
 
 const eventHandlers = (function () {
 
@@ -30,6 +31,7 @@ const eventHandlers = (function () {
     const form = document.querySelector(".item-form")
     itemUl.addEventListener("click", ((e) => {
       if (e.target.classList.contains("edit-item")) {
+        itemElements.selectCurrentItem(e)
         const dialog = document.querySelector(".item-dialog");
         form.dataset.mode = "edit-item"
         dialog.showModal();
@@ -37,10 +39,6 @@ const eventHandlers = (function () {
       }
     }))
   })()
-
-  const submitEditForm = function() {
-    
-  }
 
   const fillEditFormFields = function (e) {
     const itemLi = e.target.closest(".item-li");
@@ -95,10 +93,26 @@ const eventHandlers = (function () {
     const form = document.querySelector(".item-form")
 
     submit.addEventListener("click", () => {
-      let newItem = createNewItem(...captureItemDataIntoArray())
-      callback(newItem)
-      form.reset();
-      document.querySelector(".item-dialog").close();
+      if (form.dataset.mode === "new-item") {
+        let newItem = createNewItem(...captureItemDataIntoArray())
+        callback(newItem)
+        form.reset();
+        document.querySelector(".item-dialog").close();
+      }
+    })
+  }
+
+  const submitEditForm = function (callback) {
+    const submit = document.querySelector(".submit-item");
+    const form = document.querySelector(".item-form")
+
+    submit.addEventListener("click", () => {
+      if (form.dataset.mode === "edit-item") {
+        let itemId = document.querySelector("#edit-item-id").value
+        callback(itemId, captureItemDataIntoArray())
+        form.reset();
+        document.querySelector(".item-dialog").close();
+      }
     })
   }
 
@@ -137,20 +151,7 @@ const eventHandlers = (function () {
     }))
   }
 
-  // const editItem = function (callback) {
-  //   const itemUl = document.querySelector(".items-list");
-  //   itemUl.addEventListener("click", ((e) => {
-  //     if (e.target.classList.contains("edit-item")) {
-  //       const dialog = document.querySelector(".item-dialog");
-  //       dialog.showModal();
-  //       const item = e.target.closest(".item-li");
-  //       const itemId = item.dataset.id;
-  //       callback(itemId);
-  //     }
-  //   }))
-  // }
-
-  return { submitItemForm, submitProjectForm, deleteProject, deleteItem }
+  return { submitItemForm, submitProjectForm, submitEditForm, deleteProject, deleteItem }
 })()
 
 export default eventHandlers;
