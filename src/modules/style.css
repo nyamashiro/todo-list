@@ -27,12 +27,42 @@ nav {
 
 button {
   grid-row: 2/3;
+  cursor: pointer;
 }
 
-li {
+.project-list li {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: blueviolet;
   margin-bottom: 10px;
+}
+
+.items-list {
+  background-color: beige;
+}
+
+.edit-item,
+.delete-item {
+  width: 30px;
+  cursor: pointer;
+}
+
+.item-li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
+}
+
+.item-name {
+  display: flex;
+  gap: 20px;
+}
+
+.item-priority {
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  display: inline-block;
 }

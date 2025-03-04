@@ -29,11 +29,11 @@ const renderElements = (function () {
     return projectButton
   }
 
-  const createContentLayout = (function (item) {
-    const content = pageElements.content
-    content.textContent = "To do items go here"
-    return content;
-  })()
+  // const createContentLayout = (function (item) {
+  //   const content = pageElements.content
+  //   content.textContent = "To do items go here"
+  //   return content;
+  // })()
 
   // const createSidebarLayout = (function () {
   //   const sidebar = pageElements.sidebar

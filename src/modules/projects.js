@@ -1,4 +1,5 @@
 const projectListElements = (function () {
+  
   const renderProjectsList = function (projects) {
     const projectUl = document.querySelector(".project-list");
     projectUl.textContent = "";
@@ -11,11 +12,6 @@ const projectListElements = (function () {
       li.appendChild(deleteButton)
       projectUl.appendChild(li);
     });
-  }
-
-  const deleteProject = function () {
-    const projects = document.querySelectorAll(".project-li");
-    projects
   }
 
   const createProjectDeleteButton = function () {

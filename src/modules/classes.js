@@ -1,13 +1,13 @@
 class ToDoItem {
-  constructor(title, desc, dueDate, priority) {
-    this.title = title;
+  constructor(name, desc, dueDate, priority) {
+    this.name = name;
     this.desc = desc;
     this.dueDate = dueDate;
     this.priority = priority;
   }
 
-  editTitle(newTitle) {
-    this.title = newTitle;
+  editName(newName) {
+    this.name = newName;
   }
 
   editDesc(newDesc) {
@@ -25,7 +25,7 @@ class ToDoItem {
 
 class List {
   constructor() {
-    this.name = "Default"
+    this.name = "Default List"
     this.projects = [];
   }
 
@@ -48,10 +48,14 @@ class Project {
   addItemToProject(item) {
     this.items.push(item)
   }
+
+  removeItemFromProject(index) {
+    this.items.splice(index, 1)
+  }
 }
 
-const createNewItem = function (title, desc, dueDate, priority) {
-  return new ToDoItem(title, desc, dueDate, priority);
+const createNewItem = function (name, desc, dueDate, priority) {
+  return new ToDoItem(name, desc, dueDate, priority);
 }
 
 const createNewProject = function (name) {
@@ -60,5 +64,7 @@ const createNewProject = function (name) {
 
 const defaultList = new List();
 
-export { createNewItem, createNewProject, defaultList}
+const defaultProject = new Project("Default Project");
+
+export { createNewItem, createNewProject, defaultList, defaultProject, ToDoItem}
 
