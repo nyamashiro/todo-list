@@ -1,4 +1,4 @@
-import { createNewItem, createNewProject, defaultList, defaultProject, ToDoItem} from "./classes.js";
+import { defaultList} from "./classes.js";
 import { itemElements } from "./todo-items.js";
 
 const projectListElements = (function () {
