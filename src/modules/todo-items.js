@@ -15,6 +15,11 @@ const itemElements = (function () {
     });
   }
 
+  const renderEmptyList = function() {
+    const itemsUl = document.querySelector(".items-list");
+    itemsUl.textContent = "";
+  }
+
   const createItemContainer = function (item) {
     let itemDiv = document.createElement("div");
     let prioritySpan = document.createElement("span");
@@ -71,7 +76,7 @@ const itemElements = (function () {
 
 
 
-  return { renderItemsList, selectCurrentItem }
+  return { renderItemsList, renderEmptyList, selectCurrentItem }
 })()
 
 export { itemElements }

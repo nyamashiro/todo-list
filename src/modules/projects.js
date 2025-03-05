@@ -1,5 +1,8 @@
+import { createNewItem, createNewProject, defaultList, defaultProject, ToDoItem} from "./classes.js";
+import { itemElements } from "./todo-items.js";
+
 const projectListElements = (function () {
-  
+
   const renderProjectsList = function (projects) {
     const projectUl = document.querySelector(".project-list");
     projectUl.textContent = "";
@@ -21,7 +24,19 @@ const projectListElements = (function () {
     return deleteButton
   }
 
-  return { renderProjectsList }
+  const displaySelectedProject = (function (callback) {
+    const projectUl = document.querySelector(".project-list");
+
+    projectUl.addEventListener("click", (e) => {
+      if (e.target.classList.contains("project-li")) {
+        const projectId = e.target.closest(".project-li").dataset.id;
+        document.querySelector("#project-item-id").value = projectId;
+        itemElements.renderItemsList(defaultList.projects[projectId].items)
+      } 
+    })
+  })()
+
+  return { renderProjectsList}
 })()
 
 

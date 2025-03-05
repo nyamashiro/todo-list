@@ -30,12 +30,13 @@ button {
   cursor: pointer;
 }
 
-.project-list li {
+.project-li {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: blueviolet;
   margin-bottom: 10px;
+  cursor: pointer;
 }
 
 .items-list {

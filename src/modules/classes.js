@@ -62,9 +62,17 @@ const createNewProject = function (name) {
   return new Project(name);
 }
 
-const defaultList = new List();
+const createNewList = function () {
+  return new List();
+}
 
-const defaultProject = new Project("Default Project");
 
-export { createNewItem, createNewProject, defaultList, defaultProject, ToDoItem}
+
+const defaultList = createNewList();
+
+const defaultProject = createNewProject("Default Project");
+
+const sampleItem = createNewItem("Sample task", "Description of the sample task", "2025-03-05", "high")
+
+export { createNewItem, createNewProject, defaultList, defaultProject, sampleItem, ToDoItem}
 

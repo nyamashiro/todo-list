@@ -1,4 +1,4 @@
-import { ToDoItem, createNewItem, createNewProject } from "./classes";
+import { createNewItem, createNewProject, defaultList} from "./classes";
 import { itemElements } from "./todo-items";
 
 const eventHandlers = (function () {
@@ -57,7 +57,6 @@ const eventHandlers = (function () {
     } else if (priority.style.backgroundColor === "rgb(81, 255, 0)") {
       priorityField.value = "low"
     }
-    console.log(itemLiArray)
     titleField.value = itemLiArray[0];
     descField.value = itemLiArray[1];
     dateField.value = itemLiArray[2];
@@ -78,7 +77,6 @@ const eventHandlers = (function () {
     let priority = document.querySelector("select").value;
 
     let formData = Array.from(inputs).map(input => input.value);
-    console.log(priority)
     return [...formData, priority]
   }
 
@@ -90,12 +88,13 @@ const eventHandlers = (function () {
   const submitItemForm = function (callback) {
 
     const submit = document.querySelector(".submit-item");
-    const form = document.querySelector(".item-form")
+    const form = document.querySelector(".item-form");
 
     submit.addEventListener("click", () => {
       if (form.dataset.mode === "new-item") {
+        const projectItemId = document.querySelector("#project-item-id").value;
         let newItem = createNewItem(...captureItemDataIntoArray())
-        callback(newItem)
+        callback(newItem, projectItemId)
         form.reset();
         document.querySelector(".item-dialog").close();
       }
@@ -108,8 +107,9 @@ const eventHandlers = (function () {
 
     submit.addEventListener("click", () => {
       if (form.dataset.mode === "edit-item") {
+        const projectItemId = document.querySelector("#project-item-id").value;
         let itemId = document.querySelector("#edit-item-id").value
-        callback(itemId, captureItemDataIntoArray())
+        callback(itemId, captureItemDataIntoArray(), projectItemId)
         form.reset();
         document.querySelector(".item-dialog").close();
       }
@@ -124,6 +124,7 @@ const eventHandlers = (function () {
     submit.addEventListener("click", () => {
       let newProject = createNewProject(captureProjectValue())
       callback(newProject)
+      document.querySelector("#project-item-id").value = defaultList.projects.length - 1;
       form.reset();
       document.querySelector(".project-dialog").close();
     })
@@ -144,9 +145,11 @@ const eventHandlers = (function () {
     const itemUl = document.querySelector(".items-list");
     itemUl.addEventListener("click", ((e) => {
       if (e.target.classList.contains("delete-item")) {
+        const projectItemId = document.querySelector("#project-item-id").value;
         const item = e.target.closest(".item-li");
         const itemId = item.dataset.id
-        callback(itemId)
+        console.log(itemId)
+        callback(itemId, projectItemId)
       }
     }))
   }
