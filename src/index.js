@@ -1,4 +1,4 @@
-import { defaultList, defaultProject, sampleItem} from "./modules/classes.js";
+import { defaultList, defaultProject, sampleItem } from "./modules/classes.js";
 import eventHandlers from "./modules/events.js"
 import renderElements from "./modules/renders.js"
 import { projectListElements } from "./modules/projects.js";
@@ -21,7 +21,11 @@ eventHandlers.submitProjectForm((newProject) => {
 eventHandlers.deleteProject((projectId) => {
   defaultList.removeProjectFromList(projectId)
   projectListElements.renderProjectsList(defaultList.projects)
-  itemElements.renderEmptyList();
+  if (defaultList.projects.length === 0) {
+    itemElements.renderEmptyList()
+  } else {
+    itemElements.renderItemsList(defaultList.projects[defaultList.projects.length - 1].items)
+  }
 })
 
 eventHandlers.deleteItem((item, projectItemId) => {
@@ -35,10 +39,10 @@ eventHandlers.submitItemForm((item, projectItemId) => {
 })
 
 eventHandlers.submitEditForm((id, values, projectItemId) => {
-defaultList.projects[projectItemId].items[id].editName(values[0])
-defaultList.projects[projectItemId].items[id].editDesc(values[1])
-defaultList.projects[projectItemId].items[id].editDueDate(values[2])
-defaultList.projects[projectItemId].items[id].editPriority(values[3])
+  defaultList.projects[projectItemId].items[id].editName(values[0])
+  defaultList.projects[projectItemId].items[id].editDesc(values[1])
+  defaultList.projects[projectItemId].items[id].editDueDate(values[2])
+  defaultList.projects[projectItemId].items[id].editPriority(values[3])
 
-itemElements.renderItemsList(defaultList.projects[projectItemId].items)
+  itemElements.renderItemsList(defaultList.projects[projectItemId].items)
 })

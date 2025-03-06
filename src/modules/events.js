@@ -1,4 +1,4 @@
-import { createNewItem, createNewProject, defaultList} from "./classes";
+import { createNewItem, createNewProject, defaultList } from "./classes";
 import { itemElements } from "./todo-items";
 
 const eventHandlers = (function () {
@@ -59,7 +59,7 @@ const eventHandlers = (function () {
     }
     titleField.value = itemLiArray[0];
     descField.value = itemLiArray[1];
-    dateField.value = itemLiArray[2];
+    dateField.value = itemLiArray[2].split(": ")[1];
   }
 
   const closeForm = (function () {
@@ -92,11 +92,16 @@ const eventHandlers = (function () {
 
     submit.addEventListener("click", () => {
       if (form.dataset.mode === "new-item") {
-        const projectItemId = document.querySelector("#project-item-id").value;
-        let newItem = createNewItem(...captureItemDataIntoArray())
-        callback(newItem, projectItemId)
-        form.reset();
-        document.querySelector(".item-dialog").close();
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return
+        } else {
+          const projectItemId = document.querySelector("#project-item-id").value;
+          let newItem = createNewItem(...captureItemDataIntoArray())
+          callback(newItem, projectItemId)
+          form.reset();
+          document.querySelector(".item-dialog").close();
+        }
       }
     })
   }
@@ -107,11 +112,16 @@ const eventHandlers = (function () {
 
     submit.addEventListener("click", () => {
       if (form.dataset.mode === "edit-item") {
-        const projectItemId = document.querySelector("#project-item-id").value;
-        let itemId = document.querySelector("#edit-item-id").value
-        callback(itemId, captureItemDataIntoArray(), projectItemId)
-        form.reset();
-        document.querySelector(".item-dialog").close();
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return
+        } else {
+          const projectItemId = document.querySelector("#project-item-id").value;
+          let itemId = document.querySelector("#edit-item-id").value
+          callback(itemId, captureItemDataIntoArray(), projectItemId)
+          form.reset();
+          document.querySelector(".item-dialog").close();
+        }
       }
     })
   }
@@ -122,11 +132,16 @@ const eventHandlers = (function () {
     const form = document.querySelector(".project-form")
 
     submit.addEventListener("click", () => {
-      let newProject = createNewProject(captureProjectValue())
-      callback(newProject)
-      document.querySelector("#project-item-id").value = defaultList.projects.length - 1;
-      form.reset();
-      document.querySelector(".project-dialog").close();
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return
+      } else {
+        let newProject = createNewProject(captureProjectValue())
+        callback(newProject)
+        document.querySelector("#project-item-id").value = defaultList.projects.length - 1;
+        form.reset();
+        document.querySelector(".project-dialog").close();
+      }
     })
   }
 
@@ -144,7 +159,7 @@ const eventHandlers = (function () {
   const deleteItem = function (callback) {
     const itemUl = document.querySelector(".items-list");
     itemUl.addEventListener("click", ((e) => {
-      if (e.target.classList.contains("delete-item")) {
+      if (e.target.classList.contains("delete-item") || e.target.id === "checkbox") {
         const projectItemId = document.querySelector("#project-item-id").value;
         const item = e.target.closest(".item-li");
         const itemId = item.dataset.id

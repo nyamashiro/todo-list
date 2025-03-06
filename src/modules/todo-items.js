@@ -4,15 +4,20 @@ import editIcon from "../assets/square-edit-outline.svg"
 const itemElements = (function () {
 
   const renderItemsList = function (items) {
-    const itemsUl = document.querySelector(".items-list");
-    itemsUl.textContent = "";
-    items.forEach((item, index) => {
-      let li = document.createElement("li");
-      li.classList.add("item-li");
-      li.dataset.id = index
-      li.append(createItemContainer(item), createIconsContainer())
-      itemsUl.appendChild(li);
-    });
+    if (items.length === 0) {
+      renderEmptyList();
+    } else {
+      const itemsUl = document.querySelector(".items-list");
+      itemsUl.textContent = "";
+      items.forEach((item, index) => {
+        let li = document.createElement("li");
+        li.classList.add("item-li");
+        li.dataset.id = index
+        li.dataset.checked = "false"
+        li.append(createCheckboxContainer(), createItemContainer(item), createIconsContainer())
+        itemsUl.appendChild(li);
+      });
+    }
   }
 
   const renderEmptyList = function() {
@@ -21,11 +26,11 @@ const itemElements = (function () {
   }
 
   const createItemContainer = function (item) {
-    let itemDiv = document.createElement("div");
-    let prioritySpan = document.createElement("span");
-    let nameH2 = document.createElement("h2");
-    let descH3 = document.createElement("h3");
-    let dateH3 = document.createElement("h3");
+    const itemDiv = document.createElement("div");
+    const prioritySpan = document.createElement("span");
+    const nameH2 = document.createElement("h2");
+    const descH3 = document.createElement("h3");
+    const dateH3 = document.createElement("h3");
 
     itemDiv.classList.add("item-container");
     prioritySpan.classList.add("item-priority")
@@ -35,7 +40,7 @@ const itemElements = (function () {
 
     nameH2.textContent = item.name
     descH3.textContent = item.desc;
-    dateH3.textContent = item.dueDate;
+    dateH3.textContent = `Due: ${item.dueDate}`;
 
     if (item.priority === "high") {
       prioritySpan.style.backgroundColor = "rgb(255, 0, 0)"
@@ -48,7 +53,7 @@ const itemElements = (function () {
     nameH2.appendChild(prioritySpan);
     itemDiv.append(nameH2, descH3, dateH3)
 
-    return itemDiv;
+    return itemDiv
   }
 
   const createIconsContainer = function () {
@@ -66,6 +71,23 @@ const itemElements = (function () {
     div.append(deleteButton, editButton)
 
     return div;
+  }
+
+  const createCheckboxContainer = function () {
+    const checkboxDiv = document.createElement("div");
+    const label = document.createElement("label");
+    const checkbox = document.createElement("input");
+
+    checkboxDiv.classList.add("checkbox");
+
+    label.setAttribute("for", "checkbox");
+    checkbox.type = "checkbox";
+    checkbox.id = "checkbox"
+
+    label.appendChild(checkbox);
+    checkboxDiv.appendChild(label);
+
+    return checkboxDiv
   }
 
   const selectCurrentItem = function(e) {

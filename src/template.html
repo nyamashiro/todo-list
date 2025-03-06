@@ -18,8 +18,7 @@
     <ul class="project-list"></ul>
   </nav>
   <div id="content">
-    <ul class="items-list">
-    </ul>
+    <ul class="items-list"></ul>
   </div>
   <dialog class="item-dialog dialog">
     <button class="close-form">X</button>
@@ -38,7 +37,7 @@
       </label>
       <div>
         <label for="priority">Priority</label>
-        <select name="priority" id="priority">
+        <select name="priority" id="priority" required>
           <option value="low">Low</option>
           <option value="med">Med</option>
           <option value="high">High</option>
@@ -51,7 +50,7 @@
     <form action="#" method="get" class="project-form">
       <button class="close-form">X</button>
       <label for="project-name">Name of project:
-        <input type="text" id="project-name" class="project">
+        <input type="text" id="project-name" class="project" required>
       </label>
       <button class="submit-project" type="button">Submit</button>
     </form>

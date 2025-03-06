@@ -43,6 +43,10 @@ button {
   background-color: beige;
 }
 
+.item-container {
+  flex: 1;
+}
+
 .edit-item,
 .delete-item {
   width: 30px;
@@ -53,7 +57,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 50px;
+  gap: 30px;
 }
 
 .item-name {
@@ -66,4 +70,12 @@ button {
   width: 25px;
   border-radius: 50%;
   display: inline-block;
+}
+
+#checkbox {
+  cursor: pointer;
+}
+
+input[type="checkbox"] {
+  zoom: 1.75;
 }
