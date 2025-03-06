@@ -1,5 +1,6 @@
 import { createNewItem, createNewProject, defaultList } from "./classes";
 import { itemElements } from "./todo-items";
+import { localStorageFunctions } from "./storage";
 
 const eventHandlers = (function () {
 
@@ -137,8 +138,11 @@ const eventHandlers = (function () {
         return
       } else {
         let newProject = createNewProject(captureProjectValue())
+        let currentList = localStorageFunctions.loadFromStorage();
+        console.log("CURRETN FROM SUBMIT FUNC", currentList)
+        console.log("DEFAULT FROM SBMIT FUC", defaultList)
         callback(newProject)
-        document.querySelector("#project-item-id").value = defaultList.projects.length - 1;
+        document.querySelector("#project-item-id").value = currentList.projects.length;
         form.reset();
         document.querySelector(".project-dialog").close();
       }

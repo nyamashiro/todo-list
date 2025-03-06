@@ -35,6 +35,7 @@ class List {
   }
 
   removeProjectFromList(index) {
+    console.log(this)
     this.projects.splice(index, 1);
   }
 }
@@ -74,5 +75,5 @@ const defaultProject = createNewProject("Default Project");
 
 const sampleItem = createNewItem("Sample task", "Description of the sample task", "2025-03-05", "high")
 
-export { createNewItem, createNewProject, defaultList, defaultProject, sampleItem, ToDoItem}
+export { createNewItem, createNewProject, defaultList, defaultProject, sampleItem, ToDoItem, List, Project}
 
